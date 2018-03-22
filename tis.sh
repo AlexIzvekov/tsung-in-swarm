@@ -6,7 +6,7 @@ echo "e.g.: $0 config.xml 1 0"
 exit 1;
 fi
 
-IMAGE_NAME=ffantasy/tsung-in-swarm:17122602
+IMAGE_NAME=piezo/tsung-in-swarm:2
 PREFIX=ff-tsung-
 NETWORK_NAME=${PREFIX}network
 CONTROLER_NAME=${PREFIX}controler
