@@ -1,10 +1,56 @@
+
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/user/share/tsung/tsung-1.0.dtd">
+<tsung loglevel="debug" version="1.0">
+    <clients>
+    </clients>
+
+    <monitoring>
+    </monitoring>
+
+    <servers>
+        <server host="188.166.225.62" port="8080" type="tcp" />
+    </servers>
+
+    <load>
+        <arrivalphase phase="1" duration="100" unit="second">
+            <users maxnumber="100000" arrivalrate="500" unit="second" />
+        </arrivalphase>
+    </load>
+
+    <options>
+        <option name="ports_range" min="1025" max="65535"/>
+    </options>
+
+    <sessions>
+        <session name="websocket" probability="100" type="ts_websocket">
+            <request>
+                <websocket type="connect" path="/ws/"></websocket>
+            </request>
+
+            <request subst="true">
+                <websocket type="message" frame="text">connectmsg</websocket>
+            </request>
+
+            <for var="i" from="1" to="10" incr="1">
+                <thinktime value="10"/>
+                <request>
+                    <websocket ack="no_ack" type="message" frame="text">heartbeat</websocket>
+                </request>
+            </for>
+        </session>
+    </sessions>
+</tsung>
+
+
 <?xml version="1.0"?>
 <!DOCTYPE tsung SYSTEM "/usr/share/tsung/tsung-1.0.dtd">
 <tsung loglevel="notice" version="1.0">
 
   <!-- Client side setup -->
   <!-- keep this node empty -->
-  <clients></clients>
+  <clients>
+  </clients>
 
   <!-- Server side setup -->
 <servers>
@@ -14,7 +60,8 @@
   <!-- to start os monitoring (cpu, network, memory). Use an erlang
   agent on the remote machine or SNMP. erlang is the default --> 
   <!-- keep this node empty, if you don't want to monitoring, you can delete this node. -->
-  <monitoring></monitoring>
+  <monitoring>
+  </monitoring>
   
   <load>
   <!-- several arrival phases can be set: for each phase, you can set
